@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +33,10 @@ public class GyakorlatController {
     @PostMapping
     public Gyakorlat uj(@RequestBody Gyakorlat gyakorlat) {
         return gyakorlatRepository.save(gyakorlat);
+    }
+
+    @DeleteMapping ("/{id}")
+    public void torol(@PathVariable Long id) {
+        gyakorlatRepository.deleteById(id);
     }
 }
