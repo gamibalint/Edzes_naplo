@@ -11,6 +11,11 @@ function App() {
       .then(data => setGyakorlat(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
+  function torol(id) {
+  fetch('http://localhost:8080/gyakorlat/' + id, {
+    method: 'DELETE',
+  }).then(() => setGyakorlat(gyakorlatok.filter(g => g.id !== id)));
+}
   function mentes() {
     fetch('http://localhost:8080/gyakorlat', {
       method: 'POST',
@@ -30,7 +35,10 @@ function App() {
       <button onClick={mentes}>Mentés</button>
       <ul>
         {gyakorlatok.map(gyakorlat => (
-          <li key={gyakorlat.id}>{gyakorlat.nev} - {gyakorlat.leiras}</li>
+          <li key={gyakorlat.id}>
+  {gyakorlat.nev} - {gyakorlat.leiras}
+  <button onClick={() => torol(gyakorlat.id)}>Törlés</button>
+</li>
         ))}
       </ul>
     </div>
