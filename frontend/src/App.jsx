@@ -7,20 +7,21 @@ function App() {
   const [edzesek, setEdzes] = useState([]);
   const [datum, setDatum] = useState("");
   const [megnevezes, setMegnevezes] = useState("");
+  const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    fetch('http://localhost:8080/gyakorlat')
+    fetch(`${API}/gyakorlat`)
       .then(response => response.json())
       .then(data => setGyakorlat(data))
       .catch(error => console.error('Error fetching data:', error));
   }, []);
   function torol(id) {
-    fetch('http://localhost:8080/gyakorlat/' + id, {
+    fetch(`${API}/gyakorlat/${id}`, {
       method: 'DELETE',
     }).then(() => setGyakorlat(gyakorlatok.filter(g => g.id !== id)));
   }
   function mentes() {
-    fetch('http://localhost:8080/gyakorlat', {
+    fetch(`${API}/gyakorlat`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -31,12 +32,12 @@ function App() {
       .then(uj => setGyakorlat([...gyakorlatok, uj]));
   }
   useEffect(() => {
-    fetch('http://localhost:8080/edzes')
+    fetch(`${API}/edzes`)
       .then(response => response.json())
       .then(data => setEdzes(data));
   }, []);
   function mentesEdzes() {
-    fetch('http://localhost:8080/edzes', {
+    fetch(`${API}/edzes`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ function App() {
       .then(uj => setEdzes([...edzesek, uj]));
   }
   function torolEdzes(id) {
-    fetch('http://localhost:8080/edzes/' + id, {
+    fetch(`${API}/edzes/${id}`, {
       method: 'DELETE',
     }).then(() => setEdzes(edzesek.filter(e => e.id !== id)));
   }
