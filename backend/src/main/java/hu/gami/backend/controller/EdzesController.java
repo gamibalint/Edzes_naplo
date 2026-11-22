@@ -27,7 +27,7 @@ public class EdzesController {
 
     @GetMapping
     public List<Edzes> getEdzesek() {
-        return edzesRepository.findAll();
+        return edzesRepository.findAllByOrderByDatumDesc();
     }
 
     @PostMapping
