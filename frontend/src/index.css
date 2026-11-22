@@ -1,0 +1,11 @@
+body {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+.list-group {
+  --bs-list-group-bg: rgba(255, 255, 255, 0.08);
+  --bs-list-group-color: white;
+  --bs-list-group-border-color: rgba(255, 255, 255, 0.15);
+}

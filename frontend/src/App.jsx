@@ -53,7 +53,7 @@ function App() {
     }).then(() => setEdzes(edzesek.filter(e => e.id !== id)));
   }
   return (
-    <div className="container mt-4">
+    <div className="container mt-4 text-white">
       <h1 className="text-center mb-4">Edzésnapló</h1>
       <h1 className="text-center mb-4">Gyakorlatok</h1>
       <div className="d-flex gap-2 mb-3">
