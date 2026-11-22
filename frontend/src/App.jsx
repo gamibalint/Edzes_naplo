@@ -53,28 +53,33 @@ function App() {
     }).then(() => setEdzes(edzesek.filter(e => e.id !== id)));
   }
   return (
-    <div>
-      <h1>Gyakorlatok</h1>
-      <input value={nev} onChange={(e) => setNev(e.target.value)} placeholder="Név" />
-      <input value={leiras} onChange={(e) => setLeiras(e.target.value)} placeholder="Leírás" />
-      <button onClick={mentes}>Mentés</button>
-      <ul>
+    <div className="container mt-4">
+      <h1 className="text-center mb-4">Edzésnapló</h1>
+      <h1 className="text-center mb-4">Gyakorlatok</h1>
+      <div className="d-flex gap-2 mb-3">
+        <input className="form-control" value={nev} onChange={(e) => setNev(e.target.value)} placeholder="Név" />
+        <input className="form-control" value={leiras} onChange={(e) => setLeiras(e.target.value)} placeholder="Leírás" />
+        <button className="btn btn-primary" onClick={mentes}>Mentés</button>
+      </div>
+      <ul className="list-group mb-5">
         {gyakorlatok.map(gyakorlat => (
-          <li key={gyakorlat.id}>
+          <li className="list-group-item d-flex justify-content-between align-items-center" key={gyakorlat.id}>
             {gyakorlat.nev} - {gyakorlat.leiras}
-            <button onClick={() => torol(gyakorlat.id)}>Törlés</button>
+            <button className="btn btn-danger btn-sm" onClick={() => torol(gyakorlat.id)}>Törlés</button>
           </li>
         ))}
       </ul>
-      <h1>Edzések</h1>
-      <input type="date" value={datum} onChange={(e) => setDatum(e.target.value)} />
-      <input value={megnevezes} onChange={(e) => setMegnevezes(e.target.value)} placeholder="Megnevezés" />
-      <button onClick={mentesEdzes}>Mentés</button>
-      <ul>
+      <h1 className="text-center mb-4">Edzések</h1>
+      <div className="d-flex gap-2 mb-3">
+        <input type="date" className="form-control" value={datum} onChange={(e) => setDatum(e.target.value)} />
+        <input className="form-control" value={megnevezes} onChange={(e) => setMegnevezes(e.target.value)} placeholder="Megnevezés" />
+        <button className="btn btn-primary" onClick={mentesEdzes}>Mentés</button>
+      </div>
+      <ul className="list-group">
         {edzesek.map(edzes => (
-          <li key={edzes.id}>
+          <li className="list-group-item d-flex justify-content-between align-items-center" key={edzes.id}>
             {edzes.datum} - {edzes.megnevezes}
-            <button onClick={() => torolEdzes(edzes.id)}>Törlés</button>
+            <button className="btn btn-danger btn-sm" onClick={() => torolEdzes(edzes.id)}>Törlés</button>
           </li>
         ))}
       </ul>
