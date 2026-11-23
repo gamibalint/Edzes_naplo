@@ -11,7 +11,6 @@ function App() {
   const [sorozatok, setSorozatok] = useState([]);
   const [suly, setSuly] = useState("");
   const [ism, setIsm] = useState("");
-  const [gyakorlatId, setGyakorlatId] = useState("");
   const API = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -68,6 +67,19 @@ function App() {
         setMegnevezes("");
       });
   }
+  function mentesSorozat() {
+  fetch(`${API}/sorozatok`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ edzesId: nyitottEdzes.id, suly, ism }),
+  })
+    .then(valasz => valasz.json())
+    .then(uj => {
+      setSorozatok([...sorozatok, uj]);
+      setSuly("");
+      setIsm("");
+    });
+}
   function torolEdzes(id) {
     fetch(`${API}/edzes/${id}`, {
       method: 'DELETE',
@@ -114,6 +126,13 @@ function App() {
         ))}
       </ul>
       {nyitottEdzes !== null && <h3>Megnyitott edzés: {nyitottEdzes.datum} - {nyitottEdzes.megnevezes}</h3>}
+      {nyitottEdzes !== null && (
+        <div className="d-flex gap-2 mt-3">
+          <input className="form-control" value={suly} onChange={(e) => setSuly(e.target.value)} placeholder="Súly" />
+          <input className="form-control" value={ism} onChange={(e) => setIsm(e.target.value)} placeholder="Ismétlés" />
+          <button className="btn btn-primary" onClick={mentesSorozat}>Mentés</button>
+        </div>
+      )}
       <ul className="list-group mt-3">
         {sorozatok.map(sorozat => (
           <li className="list-group-item" key={sorozat.id}>
